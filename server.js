@@ -1,5 +1,4 @@
 const express = require ('express');
-const bodyParser = require('body-parser'); 
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
@@ -20,9 +19,15 @@ const db = knex({
 const app = express();
 
 app.use(cors());
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.json());
 
-app.get('/', (req, res) => { res.send(db.users) })
+app.get('/', (req, res) => { res.send('Success') })
 app.post('/signin', signin.handleSignin(db, bcrypt))
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)})

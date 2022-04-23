@@ -20,14 +20,14 @@ const app = express();
 
 app.use(cors());
 const corsOptions ={
-   origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
+   origin: '*', 
+   credentials: true,            //access-control-allow-credentials:true
+   optionSuccessStatus: 200
 }
 app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.json());
 
-app.get('/', (req, res) => { res.send('Success') })
+app.get('/', (req, res) => { res.json({message: 'Success'}) })
 app.post('/signin', signin.handleSignin(db, bcrypt))
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)})

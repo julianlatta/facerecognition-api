@@ -16,7 +16,7 @@ const handleRegister = (req, res, db, bcrypt) => {
             return trx('users')
                .returning('*')
                .insert({
-                  email: loginEmail[0],
+                  email: loginEmail[0].email,
                   name: name,
                   joined: new Date()
                })
@@ -32,4 +32,4 @@ const handleRegister = (req, res, db, bcrypt) => {
 
 module.exports = {
    handleRegister: handleRegister
-}
+};

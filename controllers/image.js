@@ -14,7 +14,7 @@ const handleApiCall = (req, res) => {
 }
 
 // Whenever a user enters an image, their entry count is increased accordingly
-const handleImage = (db) => (req, res) => {
+const handleImage = (req, res, db) => {
    const { id } = req.body;
    db('users').where('id', '=', id)
    .increment('entries', 1)
